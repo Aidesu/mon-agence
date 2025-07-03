@@ -1,17 +1,17 @@
-version: '3.8'
+version: '3.9'
 
 services:
   frontend:
-    image: httpd:latest
     container_name: docker_frontend
+    build: ./frontend
     ports:
       - "81:80"
     volumes:
       - ./frontend:/usr/local/apache2/htdocs/
 
   backend:
-    image: httpd:latest
     container_name: docker_backend
+    build: ./backend 
     ports:
       - "82:80"
     volumes:
