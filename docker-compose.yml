@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   frontend:
-    image: httpd:alpine
+    image: httpd:latest
     container_name: docker_frontend
     ports:
       - "81:80"
@@ -10,20 +10,20 @@ services:
       - ./frontend:/usr/local/apache2/htdocs/
 
   backend:
-    image: httpd:alpine
+    image: httpd:latest
     container_name: docker_backend
     ports:
       - "82:80"
     volumes:
       - ./backend:/usr/local/apache2/htdocs/
-      - ./backend/BDD:/app/BDD  # Montage de votre BDD existante
+      - ./backend/BDD:/app/BDD
 
-  dbviewer:  # Service pour visualiser la BDD
+  dbviewer:
     image: lscr.io/linuxserver/sqlitebrowser
     container_name: sqlite_viewer
     ports:
       - "83:3000"
     volumes:
-      - ./backend/BDD:/db.sqlite  # Accès à votre fichier SQLite
+      - ./backend/BDD:/db.sqlite
     depends_on:
       - backend
